@@ -8,10 +8,31 @@
 import SwiftUI
 
 struct ContentView: View {
-    var body: some View {
-        Text("Hello, world!")
-            .padding()
+  @State var viewName = "main"
+
+  var body: some View {
+    return Group {
+      if "view1" == viewName {
+        View1(viewName: $viewName)
+      } else if "view2" == viewName {
+        View2(viewName: $viewName)
+      } else {
+        VStack {
+          Text("ContentView")
+          Button(action: {
+            viewName = "view1"
+          }) {
+            Text("Show View 1")
+          }.padding()
+          Button(action: {
+            viewName = "view2"
+          }) {
+            Text("Show View 2")
+          }.padding()
+        }
+      }
     }
+  }
 }
 
 struct ContentView_Previews: PreviewProvider {
